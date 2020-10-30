@@ -22,7 +22,6 @@ jobs:
         
     - name: Checkin
       env:
-         SCKEY: ${{ secrets.SCKEY }}
          username: ${{ secrets.username }}
          password: ${{ secrets.password }}
       run: |
