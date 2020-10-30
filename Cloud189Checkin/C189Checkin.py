@@ -3,19 +3,8 @@ from urllib import parse
 
 s = requests.Session()
 
-username = ""
-password = ""
-
-
-#Server酱报错推送提醒，需要填下下面的key，官网：https://sc.ftqq.com/3.version
-SCKEY = ""
-#推送url
-scurl = f"https://sc.ftqq.com/{SCKEY}.send"
-
-if(username == "" or password == ""):
-    username = input("账号：")
-    password = input("密码：")
-
+username=""
+password=""
 def main():
     msg = login(username, password)
     if(msg == "error"):
@@ -52,12 +41,7 @@ def main():
             print("抽奖次数不足")
         else:
             print(response.text)
-            if(SCKEY != ""):
-                data = {
-                    "text" : "抽奖出错",
-                    "desp" : response.text
-                    }
-                sc = requests.post(scurl, data=data)
+
     else:
         description = response.json()['description']
         print(f"抽奖获得{description}")
@@ -68,12 +52,7 @@ def main():
             print("抽奖次数不足")
         else:
             print(response.text)
-            if(SCKEY != ""):
-                data = {
-                    "text" : "第二次抽奖出错",
-                    "desp" : response.text
-                    }
-                sc = requests.post(scurl, data=data)
+
     else:
         description = response.json()['description']
         print(f"抽奖获得{description}")
@@ -158,11 +137,6 @@ def login(username, password):
         else:
             msg = r.json()['msg']
             print(msg)
-            data = {
-                "text" : "登录出错",
-                "desp" : f"错误提示：{msg}"
-                }
-            sc = requests.post(scurl, data=data)
         return "error"
     redirect_url = r.json()['toUrl']
     r = s.get(redirect_url)
@@ -170,5 +144,11 @@ def login(username, password):
     
 
 if __name__ == "__main__":
-    main()
+    import os,json
+    data=os.getenv('userinfo')
+    users=json.loads(data)
+    for k,v=users:
+        username=k
+        password=v
+        main()
 
