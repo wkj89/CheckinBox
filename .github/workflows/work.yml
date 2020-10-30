@@ -22,7 +22,7 @@ jobs:
         
     - name: Checkin
       env:
-         SCKEY: ${{ secrets.userinfo }}
+         USERINFO: ${{ secrets.userinfo }}
       run: |
         python3 ./Cloud189Checkin/C189Checkin.py <<EOF
         
