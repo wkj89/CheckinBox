@@ -1,13 +1,12 @@
 import requests, time, re, rsa, json, base64
 from urllib import parse
 
-s = requests.Session()
 
 username=""
 password=""
 def main():
-    msg = login(username, password)
-    if(msg == "error"):
+    s = login(username, password)
+    if(s == "error"):
         return None
     else:
         pass
@@ -101,6 +100,7 @@ def calculate_md5_sign(params):
     return hashlib.md5('&'.join(sorted(params.split('&'))).encode('utf-8')).hexdigest()
 
 def login(username, password):
+    s = requests.Session()
     url = "https://cloud.189.cn/udb/udb_login.jsp?pageId=1&redirectURL=/main.action"
     r = s.get(url)
     captchaToken = re.findall(r"captchaToken' value='(.+?)'", r.text)[0]
