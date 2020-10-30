@@ -24,6 +24,6 @@ jobs:
       env:
          userinfo: ${{ secrets.userinfo }}
       run: |
-        python3 ./Cloud189Checkin/C189Checkin.py <<EOF
+        python3 ./Cloud189Checkin/C189Checkin.py
         
 
