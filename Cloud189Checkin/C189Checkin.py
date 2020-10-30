@@ -147,7 +147,7 @@ if __name__ == "__main__":
     import os,json
     data=os.getenv('userinfo')
     users=json.loads(data)
-    for k,v=users:
+    for k,v in a.items():
         username=k
         password=v
         main()
