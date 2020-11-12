@@ -33,27 +33,28 @@ def main():
         "Host" : "m.cloud.189.cn",
         "Accept-Encoding" : "gzip, deflate",
     }
-    #第一次抽奖
-    response = s.get(url,headers=headers)
+    # 第一次抽奖
+    response = s.get(url, headers=headers)
     if ("errorCode" in response.text):
-        if(response.json()['errorCode'] == "User_Not_Chance"):
+        if (response.json()['errorCode'] == "User_Not_Chance"):
             print("抽奖次数不足")
         else:
             print(response.text)
 
     else:
-        description = response.json()['description']
+        description = response.json().get('description',"0")
         print(f"抽奖获得{description}")
-    #第二次抽奖
-    response = s.get(url2,headers=headers)
+    # 第二次抽奖
+    response = s.get(url2, headers=headers)
     if ("errorCode" in response.text):
-        if(response.json()['errorCode'] == "User_Not_Chance"):
+        if (response.json()['errorCode'] == "User_Not_Chance"):
             print("抽奖次数不足")
         else:
             print(response.text)
 
     else:
-        description = response.json()['description']
+
+        description = response.json().get('description',"0")
         print(f"抽奖获得{description}")
 
 BI_RM = list("0123456789abcdefghijklmnopqrstuvwxyz")
